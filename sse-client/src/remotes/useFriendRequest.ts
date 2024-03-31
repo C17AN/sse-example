@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ENDPOINT from "../constant/api";
 import axios from "./config";
 
 export const useFriendRequest = () => {
@@ -9,7 +10,7 @@ export const useFriendRequest = () => {
 
   const fetchFriendRequest = async () => {
     try {
-      const { data } = await axios.get("/friends");
+      const { data } = await axios.get(ENDPOINT.FRIEND_REQUEST);
       console.log(data);
     } catch (err) {
       if (err instanceof Error) {

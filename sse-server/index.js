@@ -1,41 +1,46 @@
 const express = require("express");
-const cors = require("cors")
+const cors = require("cors");
 const app = express();
 const PORT = 5500;
 
-app.use(cors())
+app.use(cors());
 
 app.listen(PORT, () => {
-    console.log(`Server is running at ${PORT}`)
-})
+  console.log(`Server is running at ${PORT}`);
+});
 
-app.get("/alarm", (req, res) => {
-    res.setHeader("Content-Type", 'text/event-stream');
-    res.setHeader("Cache-Control", 'no-cache');
-    res.setHeader("Connection", 'keep-alive');
+app.get("/friend/request", () => {
+  res.send("haha");
+});
 
-    const intervalId = setInterval(() => {
-        const date = new Date();
-        const data = `data: ${date.toISOString()}\n\n`;
-        res.write(data);
-        // res.flush();
-    }, 1000);
+app.get("/friend/check-request", (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
 
-    // Clear interval on client disconnect
-    req.on('close', () => {
-        clearInterval(intervalId);
-    });
-})
+  const sendEvent = () => {
+    const date = new Date();
+    res.write(`data: ${JSON.stringify(date.toISOString())}\n\n`);
+  };
+
+  sendEvent();
+
+  const intervalId = setInterval(sendEvent, 3000);
+
+  req.on("close", () => {
+    clearInterval(intervalId);
+    console.log("Client disconnected");
+  });
+});
 
 app.get("/friends", (req, res) => {
-    res.send({data: 'result'})
-})
-
+  res.send({ data: "result" });
+});
 
 app.get("/result", (req, res) => {
-    res.send({data: 'result'})
-})
+  res.send({ data: "result" });
+});
 
 app.get("/", (req, res) => {
-    res.send('Hello, world!')
-})
+  res.send("Hello, world!");
+});

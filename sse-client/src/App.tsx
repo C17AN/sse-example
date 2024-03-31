@@ -1,9 +1,8 @@
-import { useFriendRequest } from "./remotes/useFriendRequest";
-import { useSubscribeFriendRequest } from "./remotes/useSubscribeFriendRequest";
+import { useCheckFriendRequest } from "./remotes/useCheckFriendRequest";
 
 function App() {
-  useFriendRequest();
-  useSubscribeFriendRequest();
+  // useFriendRequest();
+  useCheckFriendRequest();
 
   return (
     <>
