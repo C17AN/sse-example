@@ -1,12 +1,14 @@
+import Header from "./components/Header";
+import { friendRequest } from "./remotes/friendRequest";
 import { useCheckFriendRequest } from "./remotes/useCheckFriendRequest";
 
 function App() {
-  // useFriendRequest();
-  useCheckFriendRequest();
+  const { isFriendRequestArrived } = useCheckFriendRequest();
 
   return (
     <>
-      <header>친구 추천</header>
+      <Header isFriendRequestArrived={isFriendRequestArrived} />
+      <button onClick={friendRequest}>친구 요청을 보냈습니다.</button>
     </>
   );
 }

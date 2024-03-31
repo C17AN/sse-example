@@ -1,7 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ENDPOINT from "../constant/api";
 
+export type FriendRequest = {
+  arrived: boolean;
+  friendName?: string;
+};
+
 export const useCheckFriendRequest = () => {
+  const [isFriendRequestArrived, setIsFriendRequestArrived] =
+    useState<FriendRequest>();
+
   useEffect(() => {
     const eventSource = new EventSource(
       `${ENDPOINT.BASE}${ENDPOINT.CHECK_FRIEND_REQUEST}`
@@ -11,7 +19,16 @@ export const useCheckFriendRequest = () => {
       onmessage 리스너를 작성하면 SSE 요청의 응답을 다룰 수 있습니다.
     */
     eventSource.onmessage = (message) => {
-      console.log(message.data);
+      setIsFriendRequestArrived({
+        friendName: JSON.parse(message.data).friendName,
+        arrived: true,
+      });
+
+      setTimeout(() => {
+        setIsFriendRequestArrived({
+          arrived: false,
+        });
+      }, 3000);
     };
 
     /*
@@ -25,7 +42,8 @@ export const useCheckFriendRequest = () => {
 
     return () => {
       eventSource.close();
-      console.log("EventSource Connection Ended.");
     };
   }, []);
+
+  return { isFriendRequestArrived };
 };
