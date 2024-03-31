@@ -1,6 +1,6 @@
-# 실시간 알림 구현에 사용하는 Server Send Events 알아보기
+# 실시간 알림 구현에 사용하는 Server Sent Events 알아보기
 
-Devocean에 기고된 "실시간 알림 구현에 사용하는 Server Send Events 알아보기" 포스트를 위한 예제 코드입니다.
+Devocean에 기고된 "실시간 알림 구현에 사용하는 Server Sent Events 알아보기" 포스트를 위한 예제 코드입니다.
 
 ## 실행 방법
 
