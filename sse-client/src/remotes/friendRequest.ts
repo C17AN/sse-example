@@ -1,10 +1,10 @@
 import ENDPOINT from "../constant/api";
 import axios from "./config";
 
-export const friendRequest = async () => {
+export const friendRequest = async (friendName: string) => {
   try {
     await axios.post(ENDPOINT.FRIEND_REQUEST, {
-      friendName: "chanmin",
+      friendName,
     });
   } catch (err) {
     if (err instanceof Error) {

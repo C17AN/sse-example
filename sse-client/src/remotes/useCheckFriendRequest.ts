@@ -8,7 +8,9 @@ export type FriendRequest = {
 
 export const useCheckFriendRequest = () => {
   const [isFriendRequestArrived, setIsFriendRequestArrived] =
-    useState<FriendRequest>();
+    useState<FriendRequest>({
+      arrived: false,
+    });
 
   useEffect(() => {
     const eventSource = new EventSource(
@@ -36,7 +38,7 @@ export const useCheckFriendRequest = () => {
 	    따라서, onerror 리스너를 작성해야 SSE 요청이 실패했을 때의 상황을 다룰 수 있습니다.
     */
     eventSource.onerror = (error) => {
-      console.error("EventSource failed:", error);
+      console.error("EventSource 응답 중 문제가 발생했습니다 : ", error);
       eventSource.close();
     };
 

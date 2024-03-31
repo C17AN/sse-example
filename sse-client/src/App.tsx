@@ -1,16 +1,19 @@
-import Header from "./components/Header";
-import { friendRequest } from "./remotes/friendRequest";
-import { useCheckFriendRequest } from "./remotes/useCheckFriendRequest";
+import styled from "@emotion/styled";
+import Guest from "./components/Guest";
+import SNS from "./components/SNS";
 
 function App() {
-  const { isFriendRequestArrived } = useCheckFriendRequest();
-
   return (
-    <>
-      <Header isFriendRequestArrived={isFriendRequestArrived} />
-      <button onClick={friendRequest}>친구 요청을 보냈습니다.</button>
-    </>
+    <Container>
+      <Guest />
+      <SNS />
+    </Container>
   );
 }
+
+const Container = styled.main`
+  display: flex;
+  height: 100%;
+`;
 
 export default App;
